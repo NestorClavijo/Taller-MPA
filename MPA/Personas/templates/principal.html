@@ -1,0 +1,74 @@
+{% extends "./base.html" %}
+
+{% block title %} Main {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-7 col-xl-7">
+        <h2>Listado de Personajes</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Universo</th>
+                    <th colspan="3">Opciones</th>
+                </thead>
+                <tbody>
+                    {% for c in personajes %}
+                    <tr>
+                        <td>{{c.codigo}}</td>
+                        <td>{{c.nombre}}</td>
+                        <td>{{c.edad}}</td>
+                        <td>{{c.universo.nombre}}</td>
+                        <td><a href="infoPersonaje/{{c.codigo}}" class="btn btn-primary">More</a></td>
+                        <td><a href="modificarPersona/{{c.codigo}}" class="btn btn-success">Edit</a></td>
+                        <td><a href="eliminarPersona/{{c.codigo}}" class="btn btn-danger">Delete</a></td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="registrarPersonaje/" class="btn btn-success btn-block">Añadir Personaje</a>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-5 col-xl-5">
+        <h2>Listado de Universos</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                </thead>
+                <tbody>
+                    {% for c in universos %}
+                    <tr>
+                        <td>{{c.id}}</td>
+                        <td>{{c.nombre}}</td>
+                        <td><a href="infoUniverso/{{c.id}}" class="btn btn-primary">More</a></td>
+                        <td><a href="modificarUniverso/{{c.id}}" class="btn btn-success">Edit</a></td>
+                        <td><a href="eliminarUniverso/{{c.id}}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="registrarUniverso/" class="btn btn-success btn-block">Añadir Universo</a>
+        </div>
+    </div>
+</div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      {% if messages %}
+        {% for m in messages %}
+          <script>
+            Swal.fire({
+              "title": "Eliminado correctamente",
+              "text": "{{m}}",
+              "icon": "success"
+            })
+          </script>
+        {% endfor %}
+      {% endif %}
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "./base.html" %}
+
+{% block title %} Main {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="card formulario">
+                <div class="card-body">
+                    <h3>Editar personaje</h3>
+                    <form action="/editarPersona/" method="POST">{% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" id="codigo" name="codigo" value="{{persona.codigo}}" class="from-control" placeholder="Codigo" minlength="4" maxlength="4" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="nombre" name="nombre"  value="{{persona.nombre}}" class="from-control" placeholder="Nombre" minlength="2" maxlength="30" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="apellido" name="apellido" value="{{persona.apellido}}" class="from-control" placeholder="Apellido" minlength="2" maxlength="30" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="edad" name="edad" value="{{persona.edad}}" class="from-control" placeholder="Edad">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="nacionalidad" name="nacionalidad" value="{{persona.nacionalidad}}" class="from-control" placeholder="Nacionalidad" minlength="1" maxlength="15" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="raza" name="raza" class="from-control" value="{{persona.raza}}" placeholder="Raza" minlength="2" maxlength="10" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="imagen" name="imagen" class="from-control" value="{{persona.image_url}}" placeholder="Direccion de la imagen">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="descripcion" name="descripcion" class="from-control" value="{{persona.descripcion}}" placeholder="Breve descripcion">
+                        </div>
+                        <select name="selector" id="selector">
+                            {% for c in universos %}
+                                <option id="{{c.nombre}}">{{c.id}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn block">Guardar</button>
+                            <a href="/" class="btn btn-danger">Cancelar</a>
+                        </div>
+            
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>universos</th>
+                        </thead>
+                        <tbody>
+                            {% for c in universos %}
+                            <tr>
+                                <td>{{c}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      {% if messages %}
+        {% for m in messages %}
+          <script>
+            Swal.fire({
+              "title": "Error",
+              "text": "{{m}}",
+              "icon": "error"
+            })
+          </script>
+        {% endfor %}
+      {% endif %}
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "./base.html" %}
+
+{% block title %} Main {% endblock %}
+
+{% block body %}
+<div >
+    <div class="formulario_universo">
+        <h3 style="text-align: center;">Editar Universo</h3>
+        <form action="/editarUniverso/" method="POST">{% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="codigo" value="{{universo.id}}"name="codigo" class="from-control" placeholder="Codigo" minlength="3" maxlength="3" readonly required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="nombre" name="nombre" value="{{universo.nombre}}" class="from-control" placeholder="Nombre" minlength="2" maxlength="50" required>
+            </div>
+            <div class="form-group">
+                <input type="textarea" id="descripcion" name="descripcion" value="{{universo.descripcion}}" class="from-control descripcion" placeholder="Ingrese una breve descripcion " minlength="10" maxlength="200" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="imagen" name="imagen" value="{{universo.image_url}}" class="from-control" placeholder="Direccion de la imagen">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn block">Guardar</button>
+                <a href="/" class="btn btn-danger">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      {% if messages %}
+        {% for m in messages %}
+          <script>
+            Swal.fire({
+              "title": "Error",
+              "text": "{{m}}",
+              "icon": "error"
+            })
+          </script>
+        {% endfor %}
+      {% endif %}
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "./base.html" %}
+
+{% block title %} Main {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="centrar">
+        <div class="card centrar" style="width: 20rem;">
+            <img class="card-img-top" src="{{universo.image_url}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{universo.nombre}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{universo.id}}</h6>
+                <p class="card-text">{{universo.descripcion}}</p>
+            </div>
+            <div class="card-body">
+                <a href="/" class="btn btn-success">Principal</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      {% if messages %}
+        {% for m in messages %}
+          <script>
+            Swal.fire({
+              "title": "Success",
+              "text": "{{m}}",
+              "icon": "success"
+            })
+          </script>
+        {% endfor %}
+      {% endif %}
+
+
+{% endblock %}

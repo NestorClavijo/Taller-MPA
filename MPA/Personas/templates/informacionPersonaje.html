@@ -1,0 +1,43 @@
+{% extends "./base.html" %}
+
+{% block title %} Main {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="centrar">
+      <div class="card centrar" style="width: 20rem;">
+        <img class="card-img-top" src="{{persona.image_url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{persona.nombre}} {{persona.apellido}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{persona.codigo}}</h6>
+          <p class="card-text">{{persona.descripcion}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{persona.edad}}</li>
+          <li class="list-group-item">{{persona.nacionalidad}}</li>
+          <li class="list-group-item">{{persona.raza}}</li>
+          <li class="list-group-item">{{persona.universo}}</li>
+        </ul>
+        <div class="card-body">
+            <a href="/" class="btn btn-success">volver</a>
+            <a href="../infoUniverso/{{persona.universo.id}}" class="btn btn-primary">Info universo</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      {% if messages %}
+        {% for m in messages %}
+          <script>
+            Swal.fire({
+              "title": "Success",
+              "text": "{{m}}",
+              "icon": "success"
+            })
+          </script>
+        {% endfor %}
+      {% endif %}
+
+
+{% endblock %}
